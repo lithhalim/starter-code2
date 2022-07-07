@@ -1,7 +1,7 @@
-# Sequlize Cheat Sheet
-# Project Title
+## 🔗 Sequlize Cheat Sheet
+## 🔗 Project Title
 
-### Create Table//Create Model
+## 🔗 Create Table//Create Model
 ```javascript
 //First Thing Define The DataType
 const { STRING,INTEGER,Text } = require('sequelize');
@@ -48,14 +48,14 @@ attributes:{
 
 
 
-### Model synchronization
+## 🔗 Model synchronization
 - User.sync() - This creates the table if it doesn't exist (and does nothing if it already exists)
 - User.sync({ force: true }) - This creates the table, dropping it first if it already existed
 - User.sync({ alter: true }) - This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
 
 
 
-### Dropping Tables // Drop Model
+## 🔗 Dropping Tables // Drop Model
 - To drop the table related to a model:
 ```javascript
 await User.drop();
@@ -68,20 +68,20 @@ console.log("All tables dropped!");
 ```
 
 
-### Insert Rows //  Create Table Value
+## 🔗 Insert Rows //  Create Table Value
 ```javascript
 const Data = await Model_Name.create({ name: "Jane" });
 // console.log(jane); // Don't do this
 ```
 
-### Deleting Rows // Deleting an instance
+## 🔗 Deleting Rows // Deleting an instance
 ```javascript
 const Data= await Model_Name.destroy({
     where:{id:Name}//Remove Specific Rows -----Remove Specific Object 
 });
 
 ```
-### Select All Rows//Select All Object
+## 🔗 Select All Rows//Select All Object
 ```javascript
 // Find all users
 const users = await User.findAll();
@@ -97,7 +97,7 @@ Model.findAll({
 
 ```
 
-### Select All Rows // Using Where 
+## 🔗 Select All Rows // Using Where 
 ```javascript
 Post.findAll({
   where: {
@@ -110,7 +110,7 @@ Post.findAll({
 // SELECT * FROM post WHERE authorId = 2;
 ```
 
-### findOrCreate
+## 🔗 findOrCreate
 ```javascript
 const [user, created] = await User.findOrCreate({
   where: { username: 'sdepold' },
@@ -120,8 +120,7 @@ const [user, created] = await User.findOrCreate({
 });
 
 ```
-
-### Update Sequlize 
+## 🔗 Update Sequlize 
 ```javascript
 const updatedRows = await Model_Name.update(Object//The Data In Object
   {
@@ -130,7 +129,7 @@ const updatedRows = await Model_Name.update(Object//The Data In Object
 );
 ```
 
-### Order By Sorted Data
+## 🔗 Order By Sorted Data
 ```javascript
     return Company.findAll({
         // Add order conditions here....
@@ -142,7 +141,7 @@ const updatedRows = await Model_Name.update(Object//The Data In Object
 
 ```
 
-### Sequelize associations Create Relation
+## 🔗 Sequelize associations Create Relation
 ```javascript
 
 //Use To Connect To Model Together
@@ -165,7 +164,7 @@ const Model2=require("../post-model/Model1-model");
 
 ```
 
-### Sequelize associations Get Data From Relation
+## 🔗 Sequelize associations Get Data From Relation
 
 ```javascript
 const Main_model=required("/data/main-model/")
@@ -191,7 +190,7 @@ module.exports=async(req,res)=>{
 
 ```
 
-### Create Many Associations 
+## 🔗 Create Many Associations 
 ```javascript
 return Product.create({
   title: 'Chair',
