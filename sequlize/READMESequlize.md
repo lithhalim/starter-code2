@@ -42,19 +42,7 @@ attributes:{
 ```
 
 
-<p style="color:red">Coclusion :The Table You Will Create Is Class With Propertes And You Will Instanse To Set The Vlaue Of Attribute On The Same Class</p>
-
-
-
-
-## 🔗 Model synchronization
-- User.sync() - This creates the table if it doesn't exist (and does nothing if it already exists)
-- User.sync({ force: true }) - This creates the table, dropping it first if it already existed
-- User.sync({ alter: true }) - This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
-
-
-
-## 🔗 Dropping Tables // Drop Model
+## 🔗 Dropping Tables @ Drop Model
 - To drop the table related to a model:
 ```javascript
 await User.drop();
@@ -67,20 +55,20 @@ console.log("All tables dropped!");
 ```
 
 
-## 🔗 Insert Rows //  Create Table Value
+## 🔗 Insert Rows @  Create Table Value
 ```javascript
 const Data = await Model_Name.create({ name: "Jane" });
 // console.log(jane); // Don't do this
 ```
 
-## 🔗 Deleting Rows // Deleting an instance
+## 🔗 Deleting Rows @ Deleting an instance
 ```javascript
 const Data= await Model_Name.destroy({
     where:{id:Name}//Remove Specific Rows -----Remove Specific Object 
 });
 
 ```
-## 🔗 Select All Rows//Select All Object
+## 🔗 Select All Rows @ Select All Object
 ```javascript
 // Find all users
 const users = await User.findAll();
@@ -96,7 +84,7 @@ Model.findAll({
 
 ```
 
-## 🔗 Select All Rows // Using Where 
+## 🔗 Select All Rows @ Using Where 
 ```javascript
 Post.findAll({
   where: {
@@ -109,7 +97,7 @@ Post.findAll({
 // SELECT * FROM post WHERE authorId = 2;
 ```
 
-## 🔗 findOrCreate
+## 🔗 findOrCreate 
 ```javascript
 const [user, created] = await User.findOrCreate({
   where: { username: 'sdepold' },
@@ -119,7 +107,7 @@ const [user, created] = await User.findOrCreate({
 });
 
 ```
-## 🔗 Update Sequlize 
+## 🔗 Update Sequlize @ Update Rows
 ```javascript
 const updatedRows = await Model_Name.update(Object//The Data In Object
   {
@@ -210,3 +198,117 @@ return Product.create({
 
 
 ```
+
+## 🔗 Getters, Setters 
+```javascript
+// Function Use To Encapsulation The Data To Specified The Data Get And Return
+const Post = Database.define('TableName', {
+  content: {
+    type: DataTypes.TEXT,
+    //The Seter and get put in proprites to modify data befor input and send
+    get() {
+      const storedValue = this.getDataValue('content');//The Data In Content Will Insert Here
+      return `${storedValue}++`//you modify data befor send it 
+    },
+    set(value) {//The Value Is The Content
+      let data=`${value}$$$$`//the data will put in database
+      this.setDataValue('content', data);//use setDataValue to set data
+    }
+  }
+});
+
+
+```
+
+
+## 🔗 Virtual fields
+```javascript
+//create property can use in server but without save in the database
+const User = sequelize.define('user', {
+  firstName: DataTypes.TEXT,
+  lastName: DataTypes.TEXT,
+  fullName: {
+    type: DataTypes.VIRTUAL,//The Value Of Full Name Will Not Save In Database
+    get() {
+      return `${this.firstName} ${this.lastName}`;
+    },
+    set(value) {
+      throw new Error('Do not try to set the `fullName` value!');
+    }
+  }
+});
+
+```
+
+
+## 🔗 Model synchronization
+- User.sync() - This creates the table if it doesn't exist (and does nothing if it already exists)
+- User.sync({ force: true }) - This creates the table, dropping it first if it already existed
+- User.sync({ alter: true }) - This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
+
+
+### ORM standes for Object Relation Mapping --:>technique query and mapping database using oop
+![ORM](ORM.jpg)
+
+## 🔗 Create Connection With Database
+
+## 🔗 installation
+```javascript
+npm install --save sequelize
+
+# One of the following:
+$ npm install --save pg pg-hstore # Postgres
+$ npm install --save mysql2
+$ npm install --save mariadb
+$ npm install --save sqlite3
+$ npm install --save tedious # Microsoft SQL Server
+
+```
+
+
+
+## 🔗 Connection With Database
+```javascript
+//use for testing to choose run on database or sqlite
+const POSTGRES_URI = process.env.NODE_ENV === 'test' ? 'sqlite:memory:' : process.env.DATABASE_URL;
+//USE TO RUN THE DATABASE ON HEROKKU TO MAKE CONFIGRATION 
+let sequelizeOptions =
+    process.env.NODE_ENV === "production"
+        ? {
+            dialect: 'postgres',//The Sequlize Use Absrtaction You Can Choose (Mysql,sql server,postgress)
+            protocol: 'postgres',
+            dialectOptions: {
+                ssl :{require: true,rejectUnauthorized: false},
+                native: true
+            }
+        } : {};
+
+module.exports= new Sequelize(POSTGRES_URI,sequelizeOptions) //'postgres://user:pass@example.com:5432/dbname' Example for postgres
+
+```
+
+
+## 🔗 check connection Database 
+```javascript
+try {
+  await sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
+
+```
+
+
+
+## 🔗 Why We Will Usa sequlize 
+- Write less code 
+- Avoid Sql quires
+- Abstract the db system  <---->  you can use muktible type database 
+
+
+<p style="color:red">Coclusion :The Table You Will Create Is Class With Propertes And You Will Instanse To Set The Vlaue Of Attribute On The Same Class</p>
+
+
+
+
