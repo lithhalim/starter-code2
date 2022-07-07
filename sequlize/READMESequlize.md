@@ -1,4 +1,5 @@
 # Sequlize Cheat Sheet
+# Project Title
 
 ### Create Table//Create Model
 ```javascript
