@@ -307,7 +307,6 @@ try {
 - Abstract the db system  <---->  you can use muktible type database 
 
 
-<p style="color:red">Coclusion :The Table You Will Create Is Class With Propertes And You Will Instanse To Set The Vlaue Of Attribute On The Same Class</p>
 
 
 
