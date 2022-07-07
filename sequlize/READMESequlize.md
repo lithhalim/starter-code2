@@ -1,7 +1,6 @@
 ## 🔗 Sequlize Cheat Sheet
-## 🔗 Project Title
 
-## 🔗 Create Table//Create Model
+## 🔗 Create Table @ Create Model
 ```javascript
 //First Thing Define The DataType
 const { STRING,INTEGER,Text } = require('sequelize');
